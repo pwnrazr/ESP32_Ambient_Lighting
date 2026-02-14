@@ -53,17 +53,17 @@ void sensorSetup()
 
 void sensorloop()
 {
-  EVERY_N_SECONDS(10)    // Every N seconds because I want it to
+  EVERY_N_SECONDS(5)    // Every N seconds because I want it to
   { // Dust
     sendDustData();
   }
 
-  EVERY_N_SECONDS(10)    // Used to be every 8 seconds because datasheet of SHT31 8-30 sec sample rate
+  EVERY_N_SECONDS(8)    // Every 8 seconds because datasheet of SHT31 8-30 sec sample rate
   { // SHT31 Temp and Humidity
     sendSHT31Data();
   }
 
-  EVERY_N_SECONDS(10)    // Used to be every 1 second because datasheet says 1HZ sampling rate is best
+  EVERY_N_SECONDS(1)    // Every 1 second because datasheet says 1HZ sampling rate is best
   { // SGP30 eCO2 and TVOC
     sendSGP30Data();
   }
@@ -78,7 +78,7 @@ void sendSGP30Data()
 {
   if(sensorsReady == false)
   {
-    if(sensorCount <= 3) // Wait for warmup
+    if(sensorCount <= 30) // Wait for warmup
     {
       sensorCount++;
     }
